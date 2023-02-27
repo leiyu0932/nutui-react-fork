@@ -7,6 +7,7 @@ The user can enter content in the text box.
 ### Install
 
 ```javascript
+// react
 import { Input } from '@nutui/nutui-react';
 
 ```
@@ -22,7 +23,7 @@ const App = () => {
     const [value, UpdateValue] = useState('')
   return (
     <>
-      <Input label="Text" defaultValue={value} placeholder="Text" change={(val) => {
+      <Input name="text" label="Text" defaultValue={value} placeholder="Text" change={(val) => {
             UpdateValue(val)
           }}/>
     </>
@@ -50,29 +51,34 @@ const App = () => {
   return (
     <>
        <Input
+          name="text"
           label="Text" 
           placeholder="Text" 
           defaultValue={state.text}
         />
         <Input
+          name="password"
           label="Password" 
           placeholder="Password"
           defaultValue={state.password}
           type="password"
         />
         <Input
+          name="number"
           label="Number" 
           placeholder="Number"
           defaultValue={state.number}
           type="number"
         />
         <Input
+          name="digit"
           label="Digit" 
           placeholder="Digit"
           defaultValue={state.digit}
           type="digit"
         />
         <Input
+          name="tel"
           label="Tel" 
           placeholder="Tel"
           defaultValue={state.tel}
@@ -427,6 +433,8 @@ export default App;
 | ------------ | -------------------------------------- | -------------- | ------- |
 | defaultValue | Input value                   | String         | -       |
 | type         | Input type, support all native types and `textarea` `number` `digit` type    | String         | `text`  |
+| name`v1.3.10`  | Used for form submission to obtain data | String         | -       |
+| ref`v1.3.10`  | Used to obtain internal input instance ref | RefAttributes         | -       |
 | placeholder  | Placeholder when the input box is empty         | String         | -       |
 | label        | Left text                               | String         | -       |
 | labelClass  | Left text extra class name                      | String | -  |
@@ -473,3 +481,34 @@ export default App;
 |-------|----------|
 | slotButton | Insert button |
 | slotInput `v3.1.22` | Custom input |
+
+## Theming
+
+### CSS Variables
+
+The component provides the following CSS variables, which can be used to customize styles. Please refer to [ConfigProvider component](#/en-US/component/configprovider).
+
+| Name | Default Value |
+| --- | --- |
+| --nutui-input-border-bottom | ` #eaf0fb` |
+| --nutui-input-disabled-color | ` #c8c9cc` |
+| --nutui-input-required-color | `  $required-color` |
+| --nutui-input-font-size | ` $font-size-2` |
+| --nutui-input-padding | ` 10px 25px` |
+| --nutui-inputnumber-icon-color | `  $title-color` |
+| --nutui-inputnumber-icon-void-color | `  $disable-color` |
+| --nutui-inputnumber-icon-disabled-color | `  $gray2` |
+| --nutui-inputnumber-icon-size | ` 20px` |
+| --nutui-inputnumber-input-font-size | `  12px` |
+| --nutui-inputnumber-input-font-color | `  $gray1` |
+| --nutui-inputnumber-input-background-color | `  $gray4` |
+| --nutui-inputnumber-input-border-radius | `  4px` |
+| --nutui-inputnumber-input-width | ` 40px` |
+| --nutui-inputnumber-input-margin | `  0 6px` |
+| --nutui-inputnumber-input-border | ` 0` |
+| --nutui-inputnumber-border | ` 0` |
+| --nutui-inputnumber-border-radius | ` 0` |
+| --nutui-inputnumber-height | ` auto` |
+| --nutui-inputnumber-line-height | ` normal` |
+| --nutui-inputnumber-border-box | `  content-box` |
+| --nutui-inputnumber-display | ` flex` |

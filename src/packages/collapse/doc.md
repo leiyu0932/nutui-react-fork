@@ -6,7 +6,11 @@
 
 ### 安装
 
-`import { Collapse,CollapseItem } from 'nutui-react'`
+```ts
+// react
+import { Collapse,CollapseItem } from 'nutui-react'
+
+```
 
 
 ## 代码演示
@@ -271,3 +275,29 @@ const App = () => {
 |--------|----------------|--------------|
 | change`废弃`  | 切换面板时触发 | isOpen:是否打开状态；name：当前点击的name值 |
 | onChange`v1.3.8`  | 切换面板时触发 | isOpen:是否打开状态；name：当前点击的name值 |
+
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider 组件](#/zh-CN/component/configprovider)。
+
+| 名称 | 默认值 |
+| --- | --- |
+| --nutui-collapse-item-padding`v1.4.8` | `  13px 36px 13px 26px` |
+| --nutui-collapse-item-font-size`v1.4.8` | `  $font-size-2` |
+| --nutui-collapse-item-line-height`v1.4.8` | `  24px` |
+| --nutui-collapse-item-color`v1.4.8` | ` #666666` |
+| --nutui-collapse-item-disabled-color`v1.4.8` | `  #c8c9cc` |
+| --nutui-collapse-item-icon-color`v1.4.8` | `  #666666` |
+| --nutui-collapse-item-icon-margin-right`v1.4.8` | `  5px` |
+| --nutui-collapse-item-icon-margin-left`v1.4.8` | `  5px` |
+| --nutui-collapse-item-sub-title-color`v1.4.8` | `  #666666` |
+| --nutui-collapse-wrapper-content-background-color`v1.4.8` | `  $white` |
+| --nutui-collapse-wrapper-content-color`v1.4.8` | `  #666666` |
+| --nutui-collapse-wrapper-content-font-size`v1.4.8` | `  $font-size-2` |
+| --nutui-collapse-wrapper-content-line-height`v1.4.8` | `  1.5` |
+| --nutui-collapse-wrapper-content-padding`v1.4.8` | `  12px 26px` |
+| --nutui-collapse-wrapper-empty-content-padding`v1.4.8` | `  0 26px` |
+

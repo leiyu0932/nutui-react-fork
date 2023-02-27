@@ -5,12 +5,13 @@ import React, {
   useRef,
   useState,
 } from 'react'
+import { ITouchEvent } from '@tarojs/components'
 import Trigger from './Trigger'
 import Icon from '@/packages/icon/index.taro'
 import Overlay from '@/packages/overlay/index.taro'
 import { getRectByTaro } from '../../utils/useClientRect'
 
-import { IComponent, ComponentDefaults } from '@/utils/typings'
+import { BasicComponent, ComponentDefaults } from '@/utils/typings'
 
 export type PopoverTheme = 'light' | 'dark'
 
@@ -34,7 +35,7 @@ export interface List {
   disabled?: boolean
 }
 
-export interface PopoverProps extends IComponent {
+export interface PopoverProps extends BasicComponent {
   list: List[]
   theme: PopoverTheme
   location: PopoverLocation | string
@@ -43,7 +44,7 @@ export interface PopoverProps extends IComponent {
   className: string
   style?: CSSProperties
   children?: React.ReactNode
-  onClick: (e: React.MouseEvent) => void
+  onClick: (e: React.MouseEvent | ITouchEvent) => void
   onChoose: (item: List, index: number) => void
 }
 
@@ -55,7 +56,7 @@ const defaultProps = {
   visible: false,
   offset: 20,
   className: '',
-  onClick: (e: React.MouseEvent) => {},
+  onClick: (e: React.MouseEvent | ITouchEvent) => {},
   onChoose: (item, index) => {},
 } as PopoverProps
 export const Popover: FunctionComponent<
@@ -136,7 +137,7 @@ export const Popover: FunctionComponent<
     }`
   }
 
-  const handleClick = (e: React.MouseEvent) => {
+  const handleClick = (e: React.MouseEvent | ITouchEvent) => {
     if (props.onClick) {
       props.onClick(e)
     }
@@ -162,31 +163,37 @@ export const Popover: FunctionComponent<
               <div className={`${popoverContent}`} style={getStyle()}>
                 <div className={`${popoverArrow}`} />
                 {Array.isArray(children) ? children[1] : ''}
-                {list.map((item: List, i: number) => {
-                  return (
-                    <div
-                      key={item.name}
-                      className={`popover-menu-item ${
-                        item.disabled ? 'disabled' : ''
-                      }`}
-                      onClick={() => {
-                        handleChoose(item, i)
-                      }}
-                    >
-                      {item.icon ? (
-                        <Icon
-                          classPrefix={iconClassPrefix}
-                          fontClassName={iconFontClassName}
-                          className="popover-menu-item-img"
-                          name={item.icon}
-                        />
-                      ) : (
-                        ''
-                      )}
-                      <div className="popover-menu-item-name">{item.name}</div>
-                    </div>
-                  )
-                })}
+
+                <div>
+                  {' '}
+                  {list.map((item: List, i: number) => {
+                    return (
+                      <div
+                        key={item.name}
+                        className={`popover-menu-item ${
+                          item.disabled ? 'disabled' : ''
+                        }`}
+                        onClick={() => {
+                          handleChoose(item, i)
+                        }}
+                      >
+                        {item.icon ? (
+                          <Icon
+                            classPrefix={iconClassPrefix}
+                            fontClassName={iconFontClassName}
+                            className="popover-menu-item-img"
+                            name={item.icon}
+                          />
+                        ) : (
+                          ''
+                        )}
+                        <div className="popover-menu-item-name">
+                          {item.name}
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
               </div>
             ) : null}
           </div>

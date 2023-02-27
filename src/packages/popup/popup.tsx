@@ -15,11 +15,11 @@ import { OverlayProps, defaultOverlayProps } from '@/packages/overlay/overlay'
 import Icon from '@/packages/icon'
 import Overlay from '@/packages/overlay'
 import bem from '@/utils/bem'
-import { ComponentDefaults, IComponent } from '@/utils/typings'
+import { ComponentDefaults, BasicComponent } from '@/utils/typings'
 
 type Teleport = HTMLElement | (() => HTMLElement) | null
 
-export interface PopupProps extends OverlayProps, IComponent {
+export interface PopupProps extends OverlayProps, BasicComponent {
   position: string
   transition: string
   style: React.CSSProperties
@@ -27,6 +27,7 @@ export interface PopupProps extends OverlayProps, IComponent {
   closeable: boolean
   closeIconPosition: string
   closeIcon: string
+  closeIconSize?: string | number
   destroyOnClose: boolean
   teleport: Teleport
   overlay: boolean
@@ -49,6 +50,7 @@ const defaultProps = {
   closeable: false,
   closeIconPosition: 'top-right',
   closeIcon: 'close',
+  closeIconSize: '12px',
   destroyOnClose: true,
   teleport: null,
   overlay: true,
@@ -63,7 +65,8 @@ const defaultProps = {
   ...defaultOverlayProps,
 } as PopupProps
 
-let _zIndex = 2000
+// 默认1000，参看variables
+let _zIndex = 1000
 
 export const Popup: FunctionComponent<
   Partial<PopupProps> & React.HTMLAttributes<HTMLDivElement>
@@ -98,6 +101,7 @@ export const Popup: FunctionComponent<
     onClick,
     iconClassPrefix,
     iconFontClassName,
+    closeIconSize,
   } = props
 
   const [index, setIndex] = useState(zIndex || _zIndex)
@@ -125,7 +129,7 @@ export const Popup: FunctionComponent<
   const classes = classNames(
     {
       round,
-      [`popup-${position}`]: true,
+      [`nut-popup-${position}`]: true,
       [`${popClass}`]: true,
       [`${className}`]: true,
     },
@@ -133,8 +137,8 @@ export const Popup: FunctionComponent<
   )
 
   const closeClasses = classNames({
-    'nutui-popup__close-icon': true,
-    [`nutui-popup__close-icon--${closeIconPosition}`]: true,
+    'nut-popup__close-icon': true,
+    [`nut-popup__close-icon--${closeIconPosition}`]: true,
   })
 
   const open = () => {
@@ -223,7 +227,7 @@ export const Popup: FunctionComponent<
                 classPrefix={iconClassPrefix}
                 fontClassName={iconFontClassName}
                 name={closeIcon}
-                size="12px"
+                size={closeIconSize}
               />
             </div>
           ) : (
@@ -264,7 +268,7 @@ export const Popup: FunctionComponent<
   }, [visible])
 
   useEffect(() => {
-    setTransitionName(transition || `popup-slide-${position}`)
+    setTransitionName(transition || `nut-popup-slide-${position}`)
   }, [position])
 
   return <>{renderToContainer(teleport as Teleport, renderNode())}</>

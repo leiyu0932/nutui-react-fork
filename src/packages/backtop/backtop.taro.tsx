@@ -1,12 +1,12 @@
 import React, { FunctionComponent, useState } from 'react'
 
-import Taro, { usePageScroll } from '@tarojs/taro'
+import { usePageScroll, pageScrollTo } from '@tarojs/taro'
 import Icon from '@/packages/icon/index.taro'
-import { IComponent, ComponentDefaults } from '@/utils/typings'
+import { BasicComponent, ComponentDefaults } from '@/utils/typings'
 
 declare const window: any
 
-export interface BackTopProps extends IComponent {
+export interface BackTopProps extends BasicComponent {
   className?: string
   bottom: number
   right: number
@@ -63,7 +63,7 @@ export const BackTop: FunctionComponent<
   // 返回顶部点击事件
   const goTop = (e: any) => {
     onClick && onClick(e)
-    Taro.pageScrollTo({
+    pageScrollTo({
       scrollTop: 0,
       duration: isAnimation && duration > 0 ? duration : 0,
     })

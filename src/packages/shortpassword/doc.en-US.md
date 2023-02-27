@@ -5,8 +5,10 @@
 Short password input box, which can be used to enter passwords, SMS verification codes, etc.
 
 ### Install
-```js
+```ts
+// react
 import { ShortPassword } from '@nutui/nutui-react';
+
 ```
 
 
@@ -189,6 +191,7 @@ export default App;
 | noButton              | whether to hide the bottom button    | Boolean        | true                         |
 | length                 | ShortPassword lenght The value is 4~6 | String｜Number | 6                            |
 | errorMsg              | Error message         | String         | ''                           |
+| autoFocus              | Be focused when ShortPassword is displayed | Boolean         | false                           |
 
 ### Events
 
@@ -200,3 +203,17 @@ export default App;
 | onClose    | Trigger an event when the close icon is clicked | -    |
 | onTips    | Trigger an event when the forget password  is clicked | -    |
 | onComplete | Input complete callback          | value    |
+
+
+## Theming
+
+### CSS Variables
+
+The component provides the following CSS variables, which can be used to customize styles. Please refer to [ConfigProvider component](#/en-US/component/configprovider).
+
+| Name | Default Value |
+| --- | --- |
+| --nutui-shortpassword-background-color | `  rgba(245, 245, 245, 1)` |
+| --nutui-shortpassword-border-color | `  #ddd` |
+| --nutui-shortpassword-error | ` $primary-color` |
+| --nutui-shortpassword-forget | `  rgba(128, 128, 128, 1)` |

@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react'
 import Taro from '@tarojs/taro'
 import { useTranslate } from '@/sites/assets/locale/taro'
 import { Button, Uploader, Progress } from '@/packages/nutui.react.taro'
+import Header from '@/sites/components/header'
 
 export type FileItemStatus =
   | 'ready'
@@ -233,7 +234,8 @@ const UploaderDemo = () => {
   }
   return (
     <>
-      <div className="demo bg-w">
+      <Header />
+      <div className={`demo ${Taro.getEnv() === 'WEB' ? 'web' : ''} bg-w`}>
         <h2>{translated['84aa6bce']}</h2>
         <Uploader url={uploadUrl} onStart={onStart} />
 
@@ -243,6 +245,7 @@ const UploaderDemo = () => {
           defaultFileList={defaultFileList}
           onRemove={onDelete}
           maximum="3"
+          multiple
           uploadIcon="dongdong"
         />
 
@@ -251,6 +254,7 @@ const UploaderDemo = () => {
           url={uploadUrl}
           defaultFileList={defaultFileList}
           maximum="10"
+          multiple
           listType="list"
         >
           <Button type="success" size="small">

@@ -9,9 +9,9 @@ import classNames from 'classnames'
 import Icon from '@/packages/icon'
 import bem from '@/utils/bem'
 
-import { IComponent, ComponentDefaults } from '@/utils/typings'
+import { BasicComponent, ComponentDefaults } from '@/utils/typings'
 
-export interface InputNumberProps extends IComponent {
+export interface InputNumberProps extends BasicComponent {
   disabled: boolean
   buttonSize: string | number
   min: string | number
@@ -113,12 +113,18 @@ export const InputNumber: FunctionComponent<
     height: pxCheck(buttonSize),
     ...style,
   }
-  const addAllow = (value = Number(inputValue)) => {
-    return value < Number(max) && !disabled
+  const addAllow = (value = inputValue) => {
+    if (value || typeof value === 'number') {
+      return value < Number(max) && !disabled
+    }
+    return false
   }
 
-  const reduceAllow = (value = Number(inputValue)) => {
-    return value > Number(min) && !disabled
+  const reduceAllow = (value = inputValue) => {
+    if (value || typeof value === 'number') {
+      return value > Number(min) && !disabled
+    }
+    return false
   }
 
   const iconMinusClasses = classNames('nut-inputnumber__icon', {
@@ -181,7 +187,7 @@ export const InputNumber: FunctionComponent<
     onChangeFuc && onChangeFuc(input.valueAsNumber, e)
     if (!isAsync) {
       if (Number.isNaN(input.valueAsNumber)) {
-        setInputValue(inputValue)
+        setInputValue('')
       } else {
         setInputValue(input.valueAsNumber)
       }
@@ -211,14 +217,16 @@ export const InputNumber: FunctionComponent<
   }
   return (
     <div className={classes} style={styles} {...restProps}>
-      <Icon
-        classPrefix={iconClassPrefix}
-        fontClassName={iconFontClassName}
-        className={iconMinusClasses}
-        size={buttonSize}
-        name="minus"
-        onClick={reduceNumber}
-      />
+      <div className="nut-input-minus">
+        <Icon
+          classPrefix={iconClassPrefix}
+          fontClassName={iconFontClassName}
+          className={iconMinusClasses}
+          size={buttonSize}
+          name="minus"
+          onClick={reduceNumber}
+        />
+      </div>
       <input
         type="number"
         min={min}
@@ -231,14 +239,16 @@ export const InputNumber: FunctionComponent<
         onBlur={burValue}
         onFocus={focusValue}
       />
-      <Icon
-        classPrefix={iconClassPrefix}
-        fontClassName={iconFontClassName}
-        className={iconAddClasses}
-        size={buttonSize}
-        name="plus"
-        onClick={addNumber}
-      />
+      <div className="nut-input-add">
+        <Icon
+          classPrefix={iconClassPrefix}
+          fontClassName={iconFontClassName}
+          className={iconAddClasses}
+          size={buttonSize}
+          name="plus"
+          onClick={addNumber}
+        />
+      </div>
     </div>
   )
 }

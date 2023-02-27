@@ -7,7 +7,9 @@ Signature component based on canvas.
 ### Install
 
 ```javascript
+// react
 import { Signature } from '@nutui/nutui-react'
+
 ```
 
 ## Demo
@@ -105,8 +107,8 @@ export default App;
 
 | 字段    | 说明                         | 回调参数                         |
 | ------- | ---------------------------- | -------------------------------- |
-| confirm`v1.3.8废弃` | Click the confirm button to trigger the event callback function | Canvas and data URI displayed by signature imageURI |
-| clear`v1.3.8废弃`   | Click the re sign button to trigger the event callback function | -                               |
+| confirm`v1.3.8 废弃` | Click the confirm button to trigger the event callback function | Canvas and data URI displayed by signature imageURI |
+| clear`v1.3.8 废弃`   | Click the re sign button to trigger the event callback function | -                               |
 | onConfirm`v1.3.8` | Click the confirm button to trigger the event callback function | Canvas and data URI displayed by signature imageURI |
 | onClear`v1.3.8`   | Click the re sign button to trigger the event callback function | -                               |
 

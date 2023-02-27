@@ -6,7 +6,8 @@
 
 ### 安装
 ```javascript
-import { Notify } from '@nutui/nutui-react';
+
+import { Notify } from '@nutui/nutui-react-taro';
 ```
 
 ## 代码演示
@@ -17,7 +18,7 @@ import { Notify } from '@nutui/nutui-react';
 
 ```tsx
 import  React, {useState} from "react";
-import { Notify, Cell } from '@nutui/nutui-react';
+import { Notify, Cell } from '@nutui/nutui-react-taro';
 
 const App = () => {
     const [showNotify, SetShowNotify] = useState(false)
@@ -44,7 +45,7 @@ const App = () => {
             />
             <Cell
                 title="基础用法"
-                click={(event: React.MouseEvent) => {
+                onClick={(event: React.MouseEvent) => {
                     changeNotify(translated.basic)
                     SetShowNotify(true)
                 }}
@@ -62,7 +63,7 @@ export default App
 
 ```tsx
 import  React, {useState} from "react";
-import { Notify, Cell } from '@nutui/nutui-react';
+import { Notify, Cell } from '@nutui/nutui-react-taro';
 
 const App = () => {
     const [showNotify, SetShowNotify] = useState(false)
@@ -86,28 +87,28 @@ const App = () => {
             />
             <Cell
                 title="主要通知"
-                click={(event: React.MouseEvent) => {
+                onClick={(event: React.MouseEvent) => {
                     changeNotify('主要通知','primary')
                     SetShowNotify(true)
                 }}
             />
             <Cell
                 title="成功通知"
-                click={(event: React.MouseEvent) => {
+                onClick={(event: React.MouseEvent) => {
                     changeNotify('成功通知','success')
                     SetShowNotify(true)
                 }}
             />
             <Cell
                 title="危险通知"
-                click={(event: React.MouseEvent) => {
+                onClick={(event: React.MouseEvent) => {
                     changeNotify('危险通知','danger')
                     SetShowNotify(true)
                 }}
             />
             <Cell
                 title="警告通知"
-                click={(event: React.MouseEvent) => {
+                onClick={(event: React.MouseEvent) => {
                     changeNotify('警告通知','warning')
                     SetShowNotify(true)
                 }}
@@ -128,7 +129,7 @@ export default App
 
 ```tsx
 import  React, {useState} from "react";
-import { Notify, Cell } from '@nutui/nutui-react';
+import { Notify, Cell } from '@nutui/nutui-react-taro';
 
 const App = () => {
     const [customShow, SetCustomShow] = useState(false)
@@ -146,7 +147,7 @@ const App = () => {
             />
             <Cell
                 title="自定义背景色和字体颜色"
-                click={(event: React.MouseEvent) => {
+                onClick={(event: React.MouseEvent) => {
                     SetCustomShow(true)
                 }}
             />
@@ -165,7 +166,7 @@ export default App
 
 ```tsx
 import  React, {useState} from "react";
-import { Notify, Cell } from '@nutui/nutui-react';
+import { Notify, Cell } from '@nutui/nutui-react-taro';
 
 const App = () => {
     const [showNotify, SetShowNotify] = useState(false)
@@ -190,14 +191,14 @@ const App = () => {
             />
             <Cell
                 title="自定义时长"
-                click={(event: React.MouseEvent) => {
+                onClick={(event: React.MouseEvent) => {
                     changeNotify('自定义时长', 5000)
                     SetShowNotify(true)
                 }}
             />
             <Cell
                 title="自定义位置"
-                click={(event: React.MouseEvent) => {
+                onClick={(event: React.MouseEvent) => {
                     changeNotify('自定义位置在底部', 5000,  'bottom')
                     SetShowNotify(true)
                 }}
@@ -233,3 +234,19 @@ export default App
 |--------|--------------|----------|
 | onClick  | 点击事件回调 | 无       |
 | onClosed | 关闭事件回调 | 无       |
+
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider 组件](#/zh-CN/component/configprovider)。
+
+| 名称 | 默认值 |
+| --- | --- |
+| --nutui-notify-text-color | ` $white` |
+| --nutui-notify-padding | ` 12px 0` |
+| --nutui-notify-font-size | ` 14px` |
+| --nutui-notify-height | ` 44px` |
+| --nutui-notify-line-height | ` auto` |
+| --nutui-notify-danger-background-color | `  rgba(250, 50, 25, 1)` |

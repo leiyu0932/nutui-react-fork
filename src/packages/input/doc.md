@@ -7,6 +7,7 @@
 ### 安装
 
 ```javascript
+// react
 import { Input } from '@nutui/nutui-react';
 
 ```
@@ -24,7 +25,7 @@ const App = () => {
     const [value, UpdateValue] = useState('')
   return (
     <>
-      <Input label="文本" defaultValue={value}  placeholder="文本" change={(val) => {
+      <Input name="text" label="文本" defaultValue={value}  placeholder="文本" change={(val) => {
             UpdateValue(val)
           }}/>
     </>
@@ -53,29 +54,34 @@ const App = () => {
   return (
     <>
        <Input
+          name="text"
           label="文本" 
           placeholder="文本" 
           defaultValue={state.text}
         />
         <Input
+          name="password"
           label="密码" 
           placeholder="密码"
           defaultValue={state.password}
           type="password"
         />
         <Input
+          name="number"
           label="数字" 
           placeholder="数字"
           defaultValue={state.number}
           type="number"
         />
         <Input
+          name="digit"
           label="整数" 
           placeholder="整数"
           defaultValue={state.digit}
           type="digit"
         />
         <Input
+          name="tel"
           label="手机号" 
           placeholder="手机号"
           defaultValue={state.tel}
@@ -421,6 +427,8 @@ export default App;
 | ------------ | -------------------------------------- | -------------- | ------- |
 | defaultValue | 初始默认值                 | String         | -       |
 | type         | 输入框类型，支持原生 `input` 标签的所有 `type` 属性，另外还支持 `textarea` `number` `digit`      | String         | `text`  |
+| name`v1.3.10`  | 组件名字，用于表单提交获取数据 | String         | -       |
+| ref`v1.3.10`  | 用于获取内部input实例ref | RefAttributes         | -       |
 | placeholder  | 输入框为空时占位符                           | String         | -       |
 | label        | 左侧文本                               | String         | -       |
 | labelClass`v1.2.1`  | 左侧文本额外类名                        | String | -  |
@@ -465,3 +473,34 @@ export default App;
 |--------------------|----------|
 | slotButton`v1.2.1`       | 自定义输入框尾部按钮 |
 | slotInput`v1.2.1` | 自定义输入框，使用此插槽后，与输入框相关的属性和事件将失效 |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider 组件](#/zh-CN/component/configprovider)。
+
+| 名称 | 默认值 |
+| --- | --- |
+| --nutui-input-border-bottom | ` #eaf0fb` |
+| --nutui-input-disabled-color | ` #c8c9cc` |
+| --nutui-input-required-color | `  $required-color` |
+| --nutui-input-font-size | ` $font-size-2` |
+| --nutui-input-padding | ` 10px 25px` |
+| --nutui-inputnumber-icon-color | `  $title-color` |
+| --nutui-inputnumber-icon-void-color | `  $disable-color` |
+| --nutui-inputnumber-icon-disabled-color | `  $gray2` |
+| --nutui-inputnumber-icon-size | ` 20px` |
+| --nutui-inputnumber-input-font-size | `  12px` |
+| --nutui-inputnumber-input-font-color | `  $gray1` |
+| --nutui-inputnumber-input-background-color | `  $gray4` |
+| --nutui-inputnumber-input-border-radius | `  4px` |
+| --nutui-inputnumber-input-width | ` 40px` |
+| --nutui-inputnumber-input-margin | `  0 6px` |
+| --nutui-inputnumber-input-border | ` 0` |
+| --nutui-inputnumber-border | ` 0` |
+| --nutui-inputnumber-border-radius | ` 0` |
+| --nutui-inputnumber-height | ` auto` |
+| --nutui-inputnumber-line-height | ` normal` |
+| --nutui-inputnumber-border-box | `  content-box` |
+| --nutui-inputnumber-display | ` flex` |

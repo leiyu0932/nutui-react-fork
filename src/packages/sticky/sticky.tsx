@@ -8,9 +8,9 @@ import React, {
 import { getScrollParent } from '@/utils/get-scroll-parent'
 import { getRect } from '@/utils/useClientRect'
 import useWatch from '@/utils/useWatch'
-import { IComponent } from '@/utils/typings'
+import { BasicComponent } from '@/utils/typings'
 
-export interface StickyProps extends IComponent {
+export interface StickyProps extends BasicComponent {
   container?: React.RefObject<HTMLElement>
   position?: 'top' | 'bottom'
   className?: string
@@ -20,6 +20,13 @@ export interface StickyProps extends IComponent {
   children: React.ReactNode
   onChange?: (val: boolean) => void
 }
+
+const defaultProps = {
+  position: 'top',
+  top: 0,
+  bottom: 0,
+  zIndex: 2000,
+} as StickyProps
 
 export const Sticky: FunctionComponent<StickyProps> = (props) => {
   const {
@@ -31,7 +38,6 @@ export const Sticky: FunctionComponent<StickyProps> = (props) => {
     container,
     className,
     onChange,
-
     ...rest
   } = props
   // const { locale } = useConfig()
@@ -178,5 +184,5 @@ export const Sticky: FunctionComponent<StickyProps> = (props) => {
   )
 }
 
-// Sticky.defaultProps = defaultProps
+Sticky.defaultProps = defaultProps
 Sticky.displayName = 'NutSticky'

@@ -7,7 +7,9 @@
 ### 安装
 
 ```ts
+// react
 import { Tabs, TabPane } from '@nutui/nutui-react';
+
 ```
 
 ## 代码演示
@@ -66,7 +68,34 @@ export default App;
 
 :::
 
-### 通过 pane-key 匹配
+### 基础用法-Title 左对齐
+
+:::demo
+
+```tsx
+import React, { useState } from "react";
+import { Tabs, TabPane } from '@nutui/nutui-react';
+
+const App = () => {
+  const [tab1value, setTab1value] = useState('0');
+  return (
+    <>
+      <Tabs value={tab1value} onChange={({ paneKey }) => {
+        setTab1value(paneKey)
+      }} leftAlign>
+        <TabPane title="Tab 1"> Tab 1 </TabPane>
+        <TabPane title="Tab 2"> Tab 2 </TabPane>
+        <TabPane title="Tab 3"> Tab 3 </TabPane>
+      </Tabs>
+    </>
+  );
+};
+export default App;
+```
+
+:::
+
+### 通过 paneKey 匹配
 
 :::demo
 
@@ -81,9 +110,9 @@ const App = () => {
       <Tabs value={tab2value} onChange={({ paneKey }) => {
         setTab2value(paneKey)
       }}>
-        <TabPane title="Tab 1" pane-key="0"> Tab 1 </TabPane>
-        <TabPane title="Tab 2" pane-key="1" disabled> Tab 2 </TabPane>
-        <TabPane title="Tab 3" pane-key="2"> Tab 3 </TabPane>
+        <TabPane title="Tab 1" paneKey="0"> Tab 1 </TabPane>
+        <TabPane title="Tab 2" paneKey="1" disabled> Tab 2 </TabPane>
+        <TabPane title="Tab 3" paneKey="2"> Tab 3 </TabPane>
       </Tabs>
     </>
   );
@@ -98,7 +127,7 @@ export default App;
 :::demo
 
 ```tsx
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Tabs, TabPane } from '@nutui/nutui-react';
 
 const App = () => {
@@ -323,6 +352,9 @@ export default App;
 | titleGutter  | 标签间隙                                      | number,string | 0          |
 | titleNode    | 自定义导航区域                                 | `() => JSX.Element[]` | 0          |
 | size         | 标签栏字体尺寸大小 可选值 large normal small | string        | normal     |
+| leftAlign`v1.4.8` | 标题左对齐 | boolean | false |
+| autoHeight`v1.2.1` | 自动高度。设置为 true 时，nut-tabs 和 nut-tabs__content 会随着当前 nut-tabpane 的高度而发生变化。 | boolean             | false     |
+| tabStyle`v1.3.8` | 标签栏样式 | React.CSSProperties | {}     |
 
 ## Tabs Children
 
@@ -344,3 +376,38 @@ export default App;
 |--------|--------------------------|--------------------------|
 | click  | 点击标签时触发           | {title,paneKey,disabled} |
 | change | 当前激活的标签改变时触发 | {title,paneKey,disabled} |
+
+
+## 主題定制
+
+### 樣式變量
+
+組件提供了下列 CSS 變量，可用於自定義樣式，使用方法請參考 [ConfigProvider 組件](#/zh-CN/component/configprovider)。
+
+| 名稱 | 默認值 |
+| --- | --- |
+| --nutui-tabs-tab-smile-color | `  $primary-color` |
+| --nutui-tabs-titles-background-color | `  $background-color` |
+| --nutui-tabs-titles-border-radius | ` 0` |
+| --nutui-tabs-titles-item-large-font-size | `  $font-size-3` |
+| --nutui-tabs-titles-item-font-size | `  $font-size-2` |
+| --nutui-tabs-titles-item-small-font-size | `  $font-size-1` |
+| --nutui-tabs-titles-item-color | `  $title-color` |
+| --nutui-tabs-titles-item-active-color | `  $title-color` |
+| --nutui-tabs-titles-item-active-font-weight`v1.4.9` | ` 600` |
+| --nutui-tabs-horizontal-tab-line-color`v1.4.9` | `linear-gradient(90deg, $primary-color 0%, rgba(#fa2c19, 0.15) 100%)`|
+| --nutui-tabs-horizontal-line-bottom`v1.4.8` | ` 15%` |
+| --nutui-tabs-horizontal-line-border-radius`v1.4.8` |` 0px`|
+| --nutui-tabs-horizontal-tab-line-opacity`v1.4.9` | ` 1`|
+| --nutui-tabs-horizontal-titles-height | `  46px` |
+| --nutui-tabs-horizontal-titles-item-min-width | `  50px` |
+| --nutui-tabs-horizontal-titles-item-active-background-color`v1.4.9` | ` $background-color3` |
+| --nutui-tabs-horizontal-titles-item-active-line-width | `  40px` |
+| --nutui-tabs-horizontal-titles-item-active-line-height`v1.4.9` | `  3px` |
+| --nutui-tabs-vertical-tab-line-color`v1.4.9` | `linear-gradient(180deg, $primary-color 0%, rgba(#fa2c19, 0.15) 100%)`|
+| --nutui-tabs-vertical-titles-item-height | `  40px` |
+| --nutui-tabs-vertical-titles-item-active-line-width`v1.4.9` | `  3px` |
+| --nutui-tabs-vertical-titles-item-active-line-height | `  14px` |
+| --nutui-tabs-vertical-titles-width | `  100px` |
+| --nutui-tabs-titles-item-line-border-radius`v1.4.9 废弃` | `  0` |
+| --nutui-tabs-titles-item-line-opacity`v1.4.9 废弃` | `  1` |

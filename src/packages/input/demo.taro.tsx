@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useTranslate } from '@/sites/assets/locale/taro'
 import { Input, Button } from '@/packages/nutui.react.taro'
+import Header from '@/sites/components/header'
+import Taro from '@tarojs/taro'
 
 interface Idata {
   val1: string
@@ -156,42 +158,52 @@ const InputDemo = () => {
 
   return (
     <>
-      <div className="demo" style={{ paddingBottom: '20px' }}>
+      <Header />
+      <div
+        className={`demo ${Taro.getEnv() === 'WEB' ? 'web' : ''}`}
+        style={{ paddingBottom: '20px' }}
+      >
         <h2>{translated.basic}</h2>
         <Input
+          name="text"
           label={translated.text}
           placeholder={translated.text}
           defaultValue={value}
-          change={(val) => {
+          onChange={(val) => {
             console.log('change value:', val)
             UpdateValue(val)
           }}
         />
         <h2>{translated.title1}</h2>
         <Input
+          name="text"
           label={translated.text}
           placeholder={translated.text}
           defaultValue={state.val1}
         />
         <Input
+          name="password"
           label={translated.password}
           placeholder={translated.password}
           defaultValue={state.password}
           type="password"
         />
         <Input
+          name="number"
           label={translated.number}
           placeholder={translated.number}
           defaultValue={state.number}
           type="number"
         />
         <Input
+          name="digit"
           label={translated.digit}
           placeholder={translated.digit}
           defaultValue={state.digit}
           type="digit"
         />
         <Input
+          name="tel"
           label={translated.tel}
           placeholder={translated.tel}
           defaultValue={state.tel}

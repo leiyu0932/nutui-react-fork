@@ -7,8 +7,10 @@ Support full screen preview videos and images, support functional call.
 ### Install
 
 
-```js
+```ts
+// react
 import { ImagePreview } from '@nutui/nutui-react'
+
 ```
 
 
@@ -18,7 +20,7 @@ import { ImagePreview } from '@nutui/nutui-react'
 
 :::demo
 ```tsx
-import  React from "react";
+import React, { useState } from 'react';
 import { ImagePreview, Cell } from '@nutui/nutui-react';
 
 const App = () => {
@@ -61,7 +63,7 @@ export default App;
 
 :::demo
 ```tsx
-import  React from "react";
+import React, { useState } from 'react';
 import { ImagePreview, Cell } from '@nutui/nutui-react';
 
 const App = () => {
@@ -104,7 +106,7 @@ export default App;
 
 :::demo
 ```tsx
-import  React from "react";
+import React, { useState } from 'react';
 import { ImagePreview, Cell } from '@nutui/nutui-react';
 
 const App = () => {
@@ -147,7 +149,7 @@ export default App;
 
 :::demo
 ```tsx
-import  React from "react";
+import React, { useState } from 'react';
 import { ImagePreview, Cell } from '@nutui/nutui-react';
 
 const App = () => {

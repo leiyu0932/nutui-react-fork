@@ -1,11 +1,11 @@
 import React, { FunctionComponent, useEffect, useRef, useState } from 'react'
-import classnames from 'classnames'
+import classNames from 'classnames'
 import Icon from '@/packages/icon/index.taro'
 import { OptionItem } from '@/packages/menuitem/menuitem.taro'
 
-import { IComponent, ComponentDefaults } from '@/utils/typings'
+import { BasicComponent, ComponentDefaults } from '@/utils/typings'
 
-export interface MenuProps extends IComponent {
+export interface MenuProps extends BasicComponent {
   className: string
   style: React.CSSProperties
   activeColor: string
@@ -99,7 +99,7 @@ export const Menu: FunctionComponent<Partial<MenuProps>> = (props) => {
         >
           {React.Children.toArray(children).map((child, index) => {
             if (!child) return null
-            const { disabled, title, value, direction, options } = (
+            const { disabled, title, value, direction, options, className } = (
               child as any
             ).props as any
             const currentTitle = options?.filter(
@@ -116,10 +116,10 @@ export const Menu: FunctionComponent<Partial<MenuProps>> = (props) => {
 
             return (
               <div
-                className={`nut-menu__item ${classnames({
+                className={`nut-menu__item ${classNames({
                   active: itemShow[index],
                   disabled,
-                })}`}
+                })} ${className}`}
                 style={{ color: itemShow[index] ? activeColor : '' }}
                 key={index}
                 onClick={() => {
@@ -127,7 +127,7 @@ export const Menu: FunctionComponent<Partial<MenuProps>> = (props) => {
                 }}
               >
                 <div
-                  className={`nut-menu__title ${classnames({
+                  className={`nut-menu__title ${classNames({
                     active: itemShow[index],
                     disabled,
                   })}`}

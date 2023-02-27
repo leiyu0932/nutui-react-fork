@@ -9,9 +9,9 @@ import classNames from 'classnames'
 import Icon from '@/packages/icon/index.taro'
 import bem from '@/utils/bem'
 
-import { IComponent, ComponentDefaults } from '@/utils/typings'
+import { BasicComponent, ComponentDefaults } from '@/utils/typings'
 
-export interface InputNumberProps extends IComponent {
+export interface InputNumberProps extends BasicComponent {
   disabled: boolean
   buttonSize: string | number
   min: string | number
@@ -141,13 +141,7 @@ export const InputNumber: FunctionComponent<
     onChangeFuc && onChangeFuc(outputValue, e)
     change && change(outputValue, e)
     if (!isAsync) {
-      if (Number(outputValue) < Number(min)) {
-        setInputValue(Number(min))
-      } else if (Number(outputValue) > Number(max)) {
-        setInputValue(Number(max))
-      } else {
-        setInputValue(outputValue)
-      }
+      setInputValue(outputValue)
     }
   }
 
@@ -175,16 +169,12 @@ export const InputNumber: FunctionComponent<
     }
   }
 
-  const changeValue = (e: any) => {
-    const value = Number(e.detail.value)
-    change && change(value, e)
-    onChangeFuc && onChangeFuc(value, e)
+  const changeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.target as HTMLInputElement
+    change && change(input.value, e)
+    onChangeFuc && onChangeFuc(input.value, e)
     if (!isAsync) {
-      if (Number.isNaN(value)) {
-        setInputValue(inputValue)
-      } else {
-        setInputValue(value)
-      }
+      setInputValue(input.value)
     }
   }
 
@@ -195,10 +185,11 @@ export const InputNumber: FunctionComponent<
     focus && focus(e)
   }
 
-  const burValue = (e: any) => {
+  const burValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (disabled) return
     if (readonly) return
-    let value = Number(e.detail.value)
+    const input = e.target as HTMLInputElement
+    let value = +input.value
     if (value < Number(min)) {
       value = Number(min)
     } else if (value > Number(max)) {
@@ -210,15 +201,18 @@ export const InputNumber: FunctionComponent<
   }
   return (
     <div className={classes} style={styles} {...restProps}>
-      <Icon
-        classPrefix={iconClassPrefix}
-        fontClassName={iconFontClassName}
-        className={iconMinusClasses}
-        size={buttonSize}
-        name="minus"
-        onClick={reduceNumber}
-      />
+      <div className="nut-input-minus">
+        <Icon
+          classPrefix={iconClassPrefix}
+          fontClassName={iconFontClassName}
+          className={iconMinusClasses}
+          size={buttonSize}
+          name="minus"
+          onClick={reduceNumber}
+        />
+      </div>
       <input
+        className="nut-number-input"
         type="number"
         min={min}
         max={max}
@@ -230,14 +224,16 @@ export const InputNumber: FunctionComponent<
         onBlur={burValue}
         onFocus={focusValue}
       />
-      <Icon
-        classPrefix={iconClassPrefix}
-        fontClassName={iconFontClassName}
-        className={iconAddClasses}
-        size={buttonSize}
-        name="plus"
-        onClick={addNumber}
-      />
+      <div className="nut-input-add">
+        <Icon
+          classPrefix={iconClassPrefix}
+          fontClassName={iconFontClassName}
+          className={iconAddClasses}
+          size={buttonSize}
+          name="plus"
+          onClick={addNumber}
+        />
+      </div>
     </div>
   )
 }

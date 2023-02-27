@@ -5,7 +5,7 @@ import React, {
   useState,
   createContext,
 } from 'react'
-import Taro from '@tarojs/taro'
+import { nextTick, createSelectorQuery } from '@tarojs/taro'
 
 import { ScrollView } from '@tarojs/components'
 import bem from '@/utils/bem'
@@ -41,7 +41,7 @@ interface ElevatorData {
 }
 export const Elevator: FunctionComponent<
   Partial<ElevatorProps> & React.HTMLAttributes<HTMLDivElement>
-> = (props) => {
+> & { Context: typeof elevatorContext } = (props) => {
   const {
     height,
     acceptKey,
@@ -103,13 +103,13 @@ export const Elevator: FunctionComponent<
 
     state.current.listHeight.push(height)
     for (let i = 0; i < state.current.listGroup.length; i++) {
-      const query = Taro.createSelectorQuery()
+      const query = createSelectorQuery()
       query
         .selectAll(`.${className} .elevator__item__${i}`)
         .boundingClientRect()
       // eslint-disable-next-line no-loop-func
       query.exec((res: any) => {
-        height += res[0][0].height
+        if (res[0][0]) height += res[0][0].height
         // console.log(res, res[0][0].height, height, 'res')
         state.current.listHeight.push(height)
       })
@@ -178,7 +178,7 @@ export const Elevator: FunctionComponent<
 
   const setListGroup = () => {
     if (listview.current) {
-      Taro.createSelectorQuery()
+      createSelectorQuery()
         .selectAll(`.${className} .nut-elevator__list__item`)
         .node((el) => {
           state.current.listGroup = [...Object.keys(el)]
@@ -212,7 +212,7 @@ export const Elevator: FunctionComponent<
 
   useEffect(() => {
     if (listview.current) {
-      Taro.nextTick(() => {
+      nextTick(() => {
         setListGroup()
       })
     }
@@ -324,3 +324,4 @@ export const Elevator: FunctionComponent<
 
 Elevator.defaultProps = defaultProps
 Elevator.displayName = 'NutElevator'
+Elevator.Context = elevatorContext

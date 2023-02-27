@@ -49,7 +49,7 @@ const DividerDemo = () => {
           <Divider>{translated.text}</Divider>
         </Cell>
 
-        <h2>{translated.withText}</h2>
+        <h2>{translated.contentPosition}</h2>
         <Cell>
           <Divider contentPosition="left">{translated.text}</Divider>
         </Cell>
@@ -75,17 +75,15 @@ const DividerDemo = () => {
         </Cell>
         <h2>{translated.verticalDivider}</h2>
         <Cell>
-          <div
-            style={{ fontSize: '14px', marginLeft: '27px', color: '#909ca4' }}
-          >
+          <div style={{ fontSize: '14px', marginLeft: '27px', color: '' }}>
             {translated.text}
 
             <Divider direction="vertical" />
-            <a href="#/Divider" style={{ color: '#1989fa' }}>
+            <a href="#/Divider" style={{ color: '#4d88ff' }}>
               {translated.link}
             </a>
             <Divider direction="vertical" />
-            <a href="#/Divider" style={{ color: '#1989fa' }}>
+            <a href="#/Divider" style={{ color: '#4d88ff' }}>
               {translated.link}
             </a>
           </div>

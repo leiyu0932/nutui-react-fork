@@ -2,6 +2,7 @@ import React from 'react'
 import Taro from '@tarojs/taro'
 import { Divider, Cell } from '@/packages/nutui.react.taro'
 import { useTranslate } from '@/sites/assets/locale/taro'
+import Header from '@/sites/components/header'
 
 interface T {
   basic: string
@@ -38,7 +39,8 @@ const DividerDemo = () => {
   })
   return (
     <>
-      <div className="demo">
+      <Header />
+      <div className={`demo ${Taro.getEnv() === 'WEB' ? 'web' : ''}`}>
         <h2>{translated.basic}</h2>
         <Cell>
           <Divider />
@@ -47,7 +49,7 @@ const DividerDemo = () => {
         <Cell>
           <Divider>{translated.text}</Divider>
         </Cell>
-        <h2>{translated.withText}</h2>
+        <h2>{translated.contentPosition}</h2>
         <Cell>
           <Divider contentPosition="left">{translated.text}</Divider>
         </Cell>

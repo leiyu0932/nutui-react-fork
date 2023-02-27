@@ -10,12 +10,12 @@ import Icon from '@/packages/icon/index.taro'
 import RadioContext from './context'
 import RadioGroup from '@/packages/radiogroup/index.taro'
 
-import { IComponent, ComponentDefaults } from '@/utils/typings'
+import { BasicComponent, ComponentDefaults } from '@/utils/typings'
 
 type Shape = 'button' | 'round'
 type Position = 'right' | 'left'
 
-export interface RadioProps extends IComponent {
+export interface RadioProps extends BasicComponent {
   className: string
   style: React.CSSProperties
   disabled: boolean
@@ -31,6 +31,8 @@ export interface RadioProps extends IComponent {
 
 const defaultProps = {
   ...ComponentDefaults,
+  className: '',
+  style: {},
   disabled: false,
   checked: false,
   shape: 'round',
@@ -89,7 +91,9 @@ export const Radio: FunctionComponent<
     return (
       <div
         className={`${componentName}__button ${
-          checkedStatement && `${componentName}__button--active`
+          !disabledStatement &&
+          checkedStatement &&
+          `${componentName}__button--active`
         } ${disabledStatement ? `${componentName}__button--disabled` : ''}`}
       >
         {children}
@@ -112,12 +116,15 @@ export const Radio: FunctionComponent<
       <Icon
         classPrefix={iconClassPrefix}
         fontClassName={iconFontClassName}
-        name={checkedStatement ? iconActiveName : iconName}
+        name={
+          !disabledStatement && checkedStatement ? iconActiveName : iconName
+        }
         size={iconSize}
         className={color()}
       />
     )
   }
+  const reverseState = textPosition === 'left'
   const renderRadioItem = () => {
     if (shape === 'button') {
       return renderButton()
@@ -133,9 +140,15 @@ export const Radio: FunctionComponent<
     onChange && onChange(e)
     context && context.onChange(valueStatement)
   }
-  const reverseState = textPosition === 'left'
+
   return (
-    <div className={`nut-radio ${className}`} onClick={handleClick} {...rest}>
+    <div
+      className={`nut-radio ${className} ${
+        reverseState ? `${componentName}--reverse` : ''
+      }`}
+      onClick={handleClick}
+      {...rest}
+    >
       {renderRadioItem()}
     </div>
   )

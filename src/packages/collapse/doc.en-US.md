@@ -6,7 +6,11 @@ Place the content in multiple folded panels, and click the panel title to expand
 
 ### Install
 
-`import { Collapse,CollapseItem } from 'nutui-react'`
+```ts
+// react
+import { Collapse,CollapseItem } from 'nutui-react'
+
+```
 
 
 ## Code demonstration
@@ -259,5 +263,30 @@ Non accordion mode：(string | number)[] | - |
 
 | Attribute | Description  | Callback Arguments     |
 |--------|----------------|--------------|
-| change`abandon`  | Triggered when the panel is switched | isOpen:Whether it is open status；name：Name value currently clicked |
+| change`Abandon`  | Triggered when the panel is switched | isOpen:Whether it is open status；name：Name value currently clicked |
 | onChange`v1.3.8`  | Triggered when the panel is switched | isOpen:Whether it is open status；name：Name value currently clicked |
+
+## Theming
+
+### CSS Variables
+
+The component provides the following CSS variables, which can be used to customize styles. Please refer to [ConfigProvider component](#/en-US/component/configprovider).
+
+| Name | Default Value |
+| --- | --- |
+| --nutui-collapse-item-padding`v1.4.8` | `  13px 36px 13px 26px` |
+| --nutui-collapse-item-font-size`v1.4.8` | `  $font-size-2` |
+| --nutui-collapse-item-line-height`v1.4.8` | `  24px` |
+| --nutui-collapse-item-color`v1.4.8` | ` #666666` |
+| --nutui-collapse-item-disabled-color`v1.4.8` | `  #c8c9cc` |
+| --nutui-collapse-item-icon-color`v1.4.8` | `  #666666` |
+| --nutui-collapse-item-icon-margin-right`v1.4.8` | `  5px` |
+| --nutui-collapse-item-icon-margin-left`v1.4.8` | `  5px` |
+| --nutui-collapse-item-sub-title-color`v1.4.8` | `  #666666` |
+| --nutui-collapse-wrapper-content-background-color`v1.4.8` | `  $white` |
+| --nutui-collapse-wrapper-content-color`v1.4.8` | `  #666666` |
+| --nutui-collapse-wrapper-content-font-size`v1.4.8` | `  $font-size-2` |
+| --nutui-collapse-wrapper-content-line-height`v1.4.8` | `  1.5` |
+| --nutui-collapse-wrapper-content-padding`v1.4.8` | `  12px 26px` |
+| --nutui-collapse-wrapper-empty-content-padding`v1.4.8` | `  0 26px` |
+

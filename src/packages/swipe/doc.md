@@ -7,7 +7,9 @@
 ### 安装
 
 ```javascript
+// react
 import { Swipe } from '@nutui/nutui-react';
+
 ```
 
 
@@ -30,6 +32,68 @@ const App = () => {
       }
     >
       <Cell title="左滑删除" roundRadius={0} />
+    </Swipe>
+  </>
+}
+export default App;
+```
+:::
+
+### 通过实例方法控制
+
+:::demo
+```tsx
+import React from "react";
+import { Swipe, Cell, Button } from '@nutui/nutui-react';
+
+const App = () => {
+  const closeRef = useRef(null)
+  const openRef = useRef(null)
+  return <>
+    <Swipe
+      ref={openRef}
+      rightAction={
+        <Button shape="square" type="danger">
+          删除
+        </Button>
+      }
+    >
+      <Cell title='点击下方按钮打开或关闭' roundRadius={0} />
+    </Swipe>
+    <Button onClick={() => openRef.current?.open()}>
+      打开
+    </Button>
+    <Button onClick={() => openRef.current?.close()}>
+      关闭
+    </Button>
+  </>
+}
+export default App;
+```
+:::
+
+### 点击关闭
+
+:::demo
+```tsx
+import React from "react";
+import { Swipe, Cell, Button } from '@nutui/nutui-react';
+
+const App = () => {
+  const closeRef = useRef(null)
+  return <>
+    <Swipe
+      ref={openRef}
+      rightAction={
+        <Button shape="square" type="danger">
+          删除
+        </Button>
+      }
+      onActionClick={() => {
+        closeRef.current.close()
+      }}
+    >
+      <Cell title='点击右侧按钮关闭' roundRadius={0} />
     </Swipe>
   </>
 }
@@ -199,8 +263,32 @@ export default App;
 
 ### Events
 
-| 事件名 | 说明           | 回调参数     |
-|--------|----------------|--------------|
-| onOpen   | 打开单元格侧边栏 | _name: string , position: `left \| right`_      |
-| onClose  | 收起单元格侧边栏 | _name: string , position: `left \| right`_    |
-| onActionClick  | 点击左侧或者右侧时触发 | _event: Event , position: `left \| right`_     |
+| 事件名           | 说明           | 回调参数     |
+|---------------|--------------|--------------|
+| onOpen        | 打开单元格侧边栏     | _name: string , position: `left \| right`_      |
+| onClose       | 收起单元格侧边栏     | _name: string , position: `left \| right`_    |
+| onActionClick | 点击左侧或者右侧时触发  | _event: Event , position: `left \| right`_     |
+| onTouchStart`v1.4.7` | ontouchStart | _event: Event      |
+| onTouchMove`v1.4.7`         | ontouchmove  | _event: Event     |
+| onTouchEnd`v1.4.7`          | ontouchend   | _event: Event     |
+
+## Swipe 实例方法
+
+| 方法名   | 说明 | 参数 |
+|-------|--| ----- |
+| open | 打开 | `left\|right` |
+| close | 关闭 | - |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider 组件](#/zh-CN/component/configprovider)。
+
+| 名称 | 默认值 |
+| --- | --- |
+| --nutui-swiper-pagination-item-background-color | `  #ddd` |
+| --nutui-swiper-pagination-item-width | `  8px` |
+| --nutui-swiper-pagination-item-height | `  3px` |
+| --nutui-swiper-pagination-item-margin-right | `  7px` |
+| --nutui-swiper-pagination-item-border-radius | `  2px` |

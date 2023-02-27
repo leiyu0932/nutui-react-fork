@@ -1,6 +1,8 @@
 import React, { FunctionComponent, useEffect, useState, useRef } from 'react'
+import { createSelectorQuery } from '@tarojs/taro'
 import Icon from '@/packages/icon'
 import bem from '@/utils/bem'
+import Elevator from '@/packages/elevator/index.taro'
 import { useConfig } from '@/packages/configprovider'
 import { SelectedRegionObj, RegionData, NextListObj } from './type'
 
@@ -31,7 +33,6 @@ const defaultProps = {
   town: [],
   height: '200px',
 } as AddressProps
-import Taro from '@tarojs/taro'
 
 export const CustomRender: FunctionComponent<
   Partial<AddressProps> & React.HTMLAttributes<HTMLDivElement>
@@ -146,7 +147,7 @@ export const CustomRender: FunctionComponent<
   const lineAnimation = (index: string | number) => {
     setTimeout(() => {
       const name: string = tabName[index as number]
-      Taro.createSelectorQuery()
+      createSelectorQuery()
         .selectAll(`.${name}`)
         .boundingClientRect((rects: any) => {
           rects &&
@@ -369,7 +370,7 @@ export const CustomRender: FunctionComponent<
           </ul>
         </div>
       )}
-      {/*
+
       {privateType === 'custom2' && (
         <div className={b('elevator-group')}>
           <Elevator
@@ -378,7 +379,7 @@ export const CustomRender: FunctionComponent<
             onClickItem={handleElevatorItem}
           />
         </div>
-      )} */}
+      )}
     </div>
   )
 }

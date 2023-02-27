@@ -2,11 +2,11 @@ import React, { FunctionComponent, useEffect, useRef, useState } from 'react'
 import bem from '@/utils/bem'
 import { useConfig } from '@/packages/configprovider'
 import Icon from '@/packages/icon'
-import { IComponent, ComponentDefaults } from '@/utils/typings'
+import { BasicComponent, ComponentDefaults } from '@/utils/typings'
 
 type TIconDirection = 'in-left' | 'out-left' | 'in-right' | 'out-right'
 
-export interface SearchBarProps extends IComponent {
+export interface SearchBarProps extends BasicComponent {
   /** 文本值	 */
   value?: number | string
   /** 输入框占位提示文字	 */
@@ -21,6 +21,7 @@ export interface SearchBarProps extends IComponent {
   maxLength?: number
   /** 是否启用清除图标，点击清除图标后会清空输入框	 */
   clearable?: boolean
+  clearIconSize?: string | number
   /** 搜索框外部背景色	 */
   background?: string
   /** 搜索框背景色	 */
@@ -74,6 +75,7 @@ const defaultProps = {
   disabled: false,
   maxLength: 9999,
   clearable: true,
+  clearIconSize: '12px',
   align: 'left',
   readonly: true,
   autoFocus: false,
@@ -100,6 +102,7 @@ export const SearchBar: FunctionComponent<
     disabled,
     maxLength,
     clearable,
+    clearIconSize,
     align,
     readOnly,
     autoFocus,
@@ -163,7 +166,7 @@ export const SearchBar: FunctionComponent<
           shape === 'round' ? searchbarBem('round') : ''
         } ${clearable ? searchbarBem('input-clear') : ''}`}
         ref={searchRef}
-        style={{ ...props.style, background: props.inputBackground }}
+        style={{ ...props.style }}
         value={value || ''}
         placeholder={placeholder || locale.placeholder}
         disabled={disabled}
@@ -252,7 +255,7 @@ export const SearchBar: FunctionComponent<
           classPrefix={iconClassPrefix}
           fontClassName={iconFontClassName}
           name="circle-close"
-          size="12"
+          size={clearIconSize}
           color="#555"
         />
       </div>
@@ -270,7 +273,7 @@ export const SearchBar: FunctionComponent<
   const renderRightLabel = () => {
     if (actionText) {
       return (
-        <div className={searchbarBem('action-text')} onClick={cancel}>
+        <div className={searchbarBem('action-text')} onClick={search}>
           {actionText}
         </div>
       )
@@ -286,6 +289,10 @@ export const SearchBar: FunctionComponent<
       }
       onSearch && onSearch(value as string)
     }
+  }
+
+  const search = () => {
+    onSearch && onSearch(value as string)
   }
 
   const cancel = () => {
@@ -306,7 +313,10 @@ export const SearchBar: FunctionComponent<
     >
       {renderLeftoutIcon()}
       {renderLabel()}
-      <div className={`${searchbarBem('content')}`}>
+      <div
+        className={`${searchbarBem('content')}`}
+        style={{ background: props.inputBackground }}
+      >
         {renderLeftinIcon()}
         {renderField()}
         {renderRightinIcon()}
